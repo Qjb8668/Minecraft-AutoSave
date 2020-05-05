@@ -100,8 +100,8 @@ bool backup(string name) {
 
     string timeStr = currentTime2String();
     CreateDirectory((path + "\\" + timeStr).c_str(), NULL);
-    FILE *pPipe  = _popen((".\\7zr.exe a -r " + path + "\\" + timeStr + "\\" + name + ".7z " +
-           ".\\" + name).c_str(), "r");
+    FILE *pPipe  = _popen((".\\7zr.exe a -r \"" + path + "\\" + timeStr + "\\" + name + ".7z\" " +
+           "\".\\" + name + "\"").c_str(), "r");
     _pclose(pPipe);
     cout << "[" << timeStr << "]" << "Backup Done!" << endl;
     return true;
@@ -122,7 +122,7 @@ void restore(string name) {
     if (ans == "y" || ans == "yes") {
         if (_access((".\\" + name).c_str(), 0) == -1)
             system(("rd .\\" + name + " \/S \/Q").c_str());
-        FILE *pPipe = _popen((".\\7zr.exe x -r -y " + restore_path + "\\" + name + ".7z").c_str(), "r");
+        FILE *pPipe = _popen((".\\7zr.exe x -r -y \"" + restore_path + "\\" + name + ".7z\"").c_str(), "r");
         _pclose(pPipe);
         MoveFile((restore_path + "\\" + name).c_str(), (".\\" + name).c_str());
         cout << "Restore Done!" << endl;
@@ -189,7 +189,7 @@ void AutoSave(string name) {
     for (; 1 != 0;) {
         thread myThread(console, name);
 
-        sleep(10);
+        sleep(300);
         autoSaveReady = true;
         myThread.join();
         if (exitSignal)

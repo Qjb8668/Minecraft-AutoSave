@@ -37,4 +37,5 @@ test
 backup
 .vscode
 .clang-format
+release-windows.zip
 !7zr.exe
