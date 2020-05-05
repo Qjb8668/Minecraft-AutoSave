@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+# my test files
+temp.cpp
+test
+backup
+.vscode
+.clang-format
+!7zr.exe
